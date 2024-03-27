@@ -80,14 +80,14 @@ export default function Cardsplanets() {
                     />
                 </div>
                 <div className="">
-                    <p className="text-[15px] text-white text-center pb-2">Passengers:</p>
+                    <p className="text-[15px] text-white text-center pb-2">Climate:</p>
                     <Select value={climateFilter} onValueChange={(value) => setClimateFilter(value)}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="All" />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectLabel>Passengers</SelectLabel>
+                                <SelectLabel>Climate</SelectLabel>
                                 <SelectItem value="all">All</SelectItem>
                                 {climatesArray.map((climate, index) => (
                                     <SelectItem key={index} value={climate}>
@@ -146,9 +146,9 @@ export default function Cardsplanets() {
             <div className="flex justify-center items-center space-x-2 py-6">
                 <button 
                     onClick={() => setCurrentPage(currentPage - 1)} 
-                    disabled={currentPage === 1}
+                    disabled={currentPage === 1 || filteredData.length === 0}
                     className={`p-1 ${
-                        currentPage === 1 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
+                        currentPage === 1 || filteredData.length === 0 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
                     }`}
                 >
                     <ChevronLeftIcon width={24} height={24}/>
@@ -157,9 +157,9 @@ export default function Cardsplanets() {
                     <button 
                         key={page} 
                         onClick={() => setCurrentPage(page)}
-                        disabled={currentPage === page}
+                        disabled={currentPage === page || filteredData.length === 0}
                         className={`bg-slate-200 p-1 ${
-                            currentPage === page ? 'bg-slate-500 text-white' : ''
+                            currentPage === page || filteredData.length === 0 ? 'bg-slate-500 text-white' : ''
                         }`}
                     >
                         {page}
@@ -167,9 +167,9 @@ export default function Cardsplanets() {
                 ))}
                 <button 
                     onClick={() => setCurrentPage(currentPage + 1)} 
-                    disabled={currentPage === totalPage}
+                    disabled={currentPage === totalPage || filteredData.length === 0}
                     className={`p-1 ${
-                        currentPage === totalPage ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
+                        currentPage === totalPage || filteredData.length === 0 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
                     }`}
                 >
                     <ChevronRightIcon width={24} height={24}/>

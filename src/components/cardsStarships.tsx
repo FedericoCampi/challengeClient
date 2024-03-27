@@ -156,29 +156,32 @@ export default function Cardsstarships() {
             </div>
             <div className="flex justify-center items-center space-x-2 py-6">
                 <button
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className={`p-1 ${currentPage === 1 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
-                        }`}
+                    onClick={() => setCurrentPage(currentPage - 1)} 
+                    disabled={currentPage === 1 || filteredData.length === 0}
+                    className={`p-1 ${
+                        currentPage === 1 || filteredData.length === 0 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
+                    }`}
                 >
                     <ChevronLeftIcon width={24} height={24} />
                 </button>
                 {Array.from({ length: totalPage }, (_, i) => i + 1).map(page => (
                     <button
-                        key={page}
+                        key={page} 
                         onClick={() => setCurrentPage(page)}
-                        disabled={currentPage === page}
-                        className={`bg-slate-200 p-1 ${currentPage === page ? 'bg-slate-500 text-white' : ''
-                            }`}
+                        disabled={currentPage === page || filteredData.length === 0}
+                        className={`bg-slate-200 p-1 ${
+                            currentPage === page || filteredData.length === 0 ? 'bg-slate-500 text-white' : ''
+                        }`}
                     >
                         {page}
                     </button>
                 ))}
                 <button
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={currentPage === totalPage}
-                    className={`p-1 ${currentPage === totalPage ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
-                        }`}
+                    onClick={() => setCurrentPage(currentPage + 1)} 
+                    disabled={currentPage === totalPage || filteredData.length === 0}
+                    className={`p-1 ${
+                        currentPage === totalPage || filteredData.length === 0 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
+                    }`}
                 >
                     <ChevronRightIcon width={24} height={24} />
                 </button>

@@ -1,6 +1,9 @@
 'use client'
 
-import ContainerCards from "@/components/containerCards";
+import Cardsfilms from "@/components/cardsFilms";
+import CardsPeople from "@/components/cardsPeople";
+import Cardsplanets from "@/components/cardsPlanets";
+import Cardsstarships from "@/components/cardsStarships";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowBigUp } from "lucide-react";
 import { useState } from "react";
@@ -24,16 +27,16 @@ export default function Home() {
           <TabsTrigger value="planets" className="w-[70px]">Planets</TabsTrigger>
         </TabsList>
         <TabsContent value="people">
-          <ContainerCards type={"people"}/>
+          <CardsPeople />
         </TabsContent>
         <TabsContent value="films">
-          <ContainerCards type={"films"}/>
+          <Cardsfilms />
         </TabsContent>
         <TabsContent value="starships">
-          <ContainerCards type={"starships"}/>
+          <Cardsstarships />
         </TabsContent>
         <TabsContent value="planets">
-          <ContainerCards type={"planets"}/>
+          <Cardsplanets />
         </TabsContent>
       </Tabs>
       {!isTabSelected && (

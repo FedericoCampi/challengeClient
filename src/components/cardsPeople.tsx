@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select";
 
 
-export default function Cards() {
+export default function CardsPeople() {
     
     const [responseArray, setResponseArray] = useState<People[]>([]);
     const [filter, setFilter] = useState<string>("");

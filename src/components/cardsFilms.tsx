@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Film } from "@/lib/definitions";
 import { Input } from "./ui/input";
-import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
-import { Calendar } from "./ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { format } from "date-fns";
 
 
@@ -21,8 +19,8 @@ export default function Cardsfilms() {
         const fetchData = async () => {
             try {
                 let url = 'http://localhost:3002/films';
-                if (releaseFilter !== 'all') {
-                    url += `?release=${releaseFilter}`;
+                if (selectedDate !== '') {
+                    url += `?release=${selectedDate}`;
                 }
                 const response = await fetch(url, {
                     method: 'GET',
@@ -36,7 +34,7 @@ export default function Cardsfilms() {
             }
         };
         fetchData();
-    }, [releaseFilter]);
+    }, [selectedDate]);
 
     useEffect(() => {
         const filtered = responseArray.filter((film) =>
@@ -54,7 +52,9 @@ export default function Cardsfilms() {
     );
 
     const handleDateChange = (date: any) => {
+        
         const formattedDate = format(date, 'yyyy-MM-dd');
+        
         setSelectedDate(formattedDate);
         setReleaseFilter(formattedDate);
     };
@@ -73,23 +73,14 @@ export default function Cardsfilms() {
                     />
                 </div>
                 <div>
-                    <p className="text-[15px] text-white text-center pb-2">Release before:</p>
-                    <Popover>
-                        <PopoverTrigger asChild>
-                            <button className="p-2 border border-gray-300 rounded-md flex items-center bg-white">
-                                <span>Pick a date</span>
-                                <CalendarIcon className="ml-2 h-5 w-5" />
-                            </button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                                mode="single"
-                                onSelect={handleDateChange}
-                                // aquí deberías incluir la lógica específica de tu calendario
-                                // como onSelect, disabled, etc.
-                            />
-                        </PopoverContent>
-                    </Popover>
+                    <p className="text-[15px] text-white text-center pb-2">
+                        Release before:
+                    </p>
+                    <input
+                        type="date"
+                        className="p-2 border border-gray-300 rounded-md bg-white"
+                        onChange={(e) => handleDateChange(new Date(e.target.value))}
+                    />
                 </div>
             </div>
 
@@ -125,29 +116,32 @@ export default function Cardsfilms() {
             </div>
             <div className="flex justify-center items-center space-x-2 py-6">
                 <button
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className={`p-1 ${currentPage === 1 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
-                        }`}
+                    onClick={() => setCurrentPage(currentPage - 1)} 
+                    disabled={currentPage === 1 || filteredData.length === 0}
+                    className={`p-1 ${
+                        currentPage === 1 || filteredData.length === 0 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
+                    }`}
                 >
                     <ChevronLeftIcon width={24} height={24} />
                 </button>
                 {Array.from({ length: totalPage }, (_, i) => i + 1).map(page => (
                     <button
-                        key={page}
+                        key={page} 
                         onClick={() => setCurrentPage(page)}
-                        disabled={currentPage === page}
-                        className={`bg-slate-200 p-1 ${currentPage === page ? 'bg-slate-500 text-white' : ''
-                            }`}
+                        disabled={currentPage === page || filteredData.length === 0}
+                        className={`bg-slate-200 p-1 ${
+                            currentPage === page || filteredData.length === 0 ? 'bg-slate-500 text-white' : ''
+                        }`}
                     >
                         {page}
                     </button>
                 ))}
                 <button
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={currentPage === totalPage}
-                    className={`p-1 ${currentPage === totalPage ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
-                        }`}
+                    onClick={() => setCurrentPage(currentPage + 1)} 
+                    disabled={currentPage === totalPage || filteredData.length === 0}
+                    className={`p-1 ${
+                        currentPage === totalPage || filteredData.length === 0 ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-200'
+                    }`}
                 >
                     <ChevronRightIcon width={24} height={24} />
                 </button>
