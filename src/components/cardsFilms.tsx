@@ -51,7 +51,7 @@ export default function Cardsfilms() {
         currentPage * itemsPerPage
     );
 
-    const handleDateChange = (date: any) => {
+    const handleDateChange = (date: Date) => {
         
         const formattedDate = format(date, 'yyyy-MM-dd');
         
