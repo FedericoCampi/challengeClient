@@ -76,7 +76,7 @@ export default function Cardsstarships() {
 
     return (
         <div className="pt-6">
-            <div className="flex items-center pb-4 space-x-4 justify-center">
+            <div className="flex items-center pb-4 space-x-4 justify-center px-4">
                 <div className="">
                     <p className="text-[15px] text-white text-center pb-2">Find by name:</p>
                     <Input
@@ -108,11 +108,11 @@ export default function Cardsstarships() {
                 </div>
             </div>
 
-            <div className="space-y-2 grid grid-cols-1 sm:grid-cols-2 sm:space-y-0 sm:gap-10 pt-6 lg:grid-cols-3 2xl:grid-cols-4">
+            <div className="space-y-2 flex flex-col items-center sm:grid sm:grid-cols-2 sm:space-y-0 sm:gap-10 pt-6 lg:grid-cols-3 2xl:grid-cols-4">
                 {currentData.map((starship, index) => (
                     <div
                         key={index}
-                        className="min-h-[280px] sm:min-h-[300px] w-[260px] border border-slate-400 rounded-md bg-slate-800 pl-4 p-2 text-white text-[20px]"
+                        className="sm:min-h-[420px] w-[260px] border border-slate-400 rounded-md bg-slate-800 pl-4 p-2 text-white text-[20px]"
                     >
                         <div className="h-[70px]">
                             <h3 className="font-bold text-[25px] text-slate-400 pb-2">
